@@ -5,22 +5,18 @@
  *          you edit them, they are not updated again.
  */
 import React, {
-  Component,
-  PropTypes
+  Component
 } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/gameState';
+import * as actors from '../actions/gameState';
 import Main from '../components/App';
 /* Populated by react-webpack-redux:reducer */
 class App extends Component {
 
-  componentWillMount(){
-    //this.props.gameStateActions.setGameState('Menu')
-  }
-
   render() {
-   
+
     const {actions, gameState} = this.props;
     return <Main actions={actions} gameState={gameState}/>;
   }
@@ -42,10 +38,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   /* Populated by react-webpack-redux:action */
-  
-  return { 
-    actions: bindActionCreators(actions, dispatch) 
+
+  return {
+    actions: bindActionCreators(actors, dispatch)
   };
-  
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

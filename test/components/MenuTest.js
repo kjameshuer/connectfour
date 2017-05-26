@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Menu from 'components\Menu.js';
+import Menu from '../../src/components/Menu.js';
 
 describe('<Menu />', function () {
 
