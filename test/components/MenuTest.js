@@ -14,5 +14,6 @@ describe('<Menu />', function () {
     it('should have a className of "menu-component"', function () {
       expect(component.hasClass('menu-component')).to.equal(true);
     });
+
   });
 });

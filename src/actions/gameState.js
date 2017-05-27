@@ -20,35 +20,41 @@ exports.initializeGameBoard = function (boardWidth, boardHeight) {
     gameBoardArray.push([]);
 
     for (let x = 0; x < boardHeight; x++) {
-      gameBoardArray[i].push(<span className="blank">_</span>);
+      gameBoardArray[i].push(<span className="blank">{`${' '}`}</span>);
     }
 
   }
 
-  return { type: 'SET_GAME_BOARD', payload: gameBoardArray };
+  return { type: 'SET_GAME_BOARD', payload: gameBoardArray, firstTime: true };
 
 };
 
-exports.addToCol = function (colPosition, col, board, player) {
+exports.addToCol = function (colPosition, col, board, player, turn, curProps) {
   const newGameBoard = board;
   const curCol = newGameBoard[colPosition];
-  const curColLen = curCol.length;
+  const curColLen = curCol.length - 1;
+  const curTurn = curProps.currentTurn;
 
-  for (let i = curColLen - 1; i >= 0; i--) {
 
-    if (curCol[i].props.children === '_') {
-      newGameBoard[colPosition][i] = (player === 0) ? <span className="p1">O</span> : <span className="p2">X</span>;
+  for (let i = curColLen; i >= 0; i--) {
 
-      if (checkForWin(newGameBoard, colPosition, i, player)) {
+    if (curCol[i].props.children === ' ') {
+
+      newGameBoard[colPosition][i] = (player === 0) ? <span className="marker">O</span> : <span className="marker">X</span>;
+
+      if (checkForWin(newGameBoard, colPosition, i, curProps.currentPlayer)) {
         return { type: GAME_STATE, payload: 'Finished' };
+      }
+      if (curTurn === 42) {
+        return { type: GAME_STATE, payload: 'Draw' }
       }
 
       return { type: 'SET_GAME_BOARD', payload: newGameBoard };
+
     }
-
   }
-  return { type: 'SHOW_ERROR', payload: 'ERROR' };
 
+  return { type: 'SHOW_ERROR', payload: 'This column is full, select a different column' };
 
 };
 

@@ -9,9 +9,13 @@ class Gameboard extends React.Component {
   }
   handleColClick(colPosition, col) {
 
-    if (this.props.gameState.currentState !== 'Finished') {
+    if (this.props.gameState.currentState === 'Play') {
       const player = this.props.gameState.currentPlayer;
-      this.props.actions.addToCol(colPosition, col, this.props.gameState.gameBoardArray, player);
+      const turn = this.props.gameState.currentTurn;
+      const gbArray = this.props.gameState.gameBoardArray;
+
+      this.props.actions.addToCol(colPosition, col, gbArray, player, turn, this.props.gameState);
+
     }
 
   }
@@ -22,8 +26,13 @@ class Gameboard extends React.Component {
       return (
         <div key={`col-${i}`} className="grid-col" onClick={() => this.handleClick(i, val)}>
           {val.map((value, x) => {
+
+            let extraClass = '';
+            if (value.props.children === 'O') extraClass = 'p1';
+            if (value.props.children === 'X') extraClass = 'p2';
+
             return (
-              <div key={`colrow-${i}${x}`} className="grid-row">{value}</div>
+              <div key={`colrow-${i}${x}`} className={`grid-row ${extraClass}`}>{value}</div>
             );
           })}
         </div>
@@ -33,7 +42,7 @@ class Gameboard extends React.Component {
     return (
       <div className="gameboard-component">
         {gameBoardGrid}
-        <div>{this.props.gameState.currentError}</div>
+        <div className="error">{this.props.gameState.currentError}</div>
       </div>
     );
   }
@@ -46,7 +55,8 @@ Gameboard.propTypes = {
     currentError: PropTypes.string,
     currentState: PropTypes.string,
     currentPlayer: PropTypes.number,
-    gameBoardArray: PropTypes.array
+    gameBoardArray: PropTypes.array,
+    currentTurn: PropTypes.number
   }),
   actions: PropTypes.shape({
     resetGame: PropTypes.func,

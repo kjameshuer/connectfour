@@ -1,15 +1,35 @@
-.gameboard-component
-  border: 1px dashed #f00
 
 .gameboard-component
-  display:block
-  .grid-col
+    // display: inline-block
+    // background: #e0e0e0
+    // box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, 0.34)
+
+.grid-col
     display: inline-block
     padding: 0px 5px
 
 
-.p1
-  color: green
 
-.p2
-  color: #00c2ff
+
+.grid-row
+    padding: 15px
+    margin: 10px 5px
+    border-radius: 100%
+    background: #efefef
+    position: relative
+    box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.32)
+
+.grid-row.p1
+  background: #b717aa
+
+.grid-row.p2
+  background: #00c2ff
+
+.marker
+  display: none
+
+.error
+  margin-top: 25px
+  font-weight: 600
+  font-size: 1.3em
+  color: #848484

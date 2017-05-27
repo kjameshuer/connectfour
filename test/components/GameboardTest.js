@@ -14,11 +14,11 @@ describe('<Gameboard />', function () {
       expect(component.hasClass('gameboard-component')).to.equal(true);
     });
 
-    it('should show the correct number of cells given an array',function(){
-      component = mount(<Gameboard gameState={{ currentState:'Play', gameBoardArray:[[['_'],['_']],[['_'],['_']],[['_'],['_']]]}}/>);
+    // it('should show the correct number of cells given an array',function(){
+    //   component = mount(<Gameboard gameState={{ currentState:'Play', gameBoardArray:[[['_'],['_']],[['_'],['_']],[['_'],['_']]]}}/>);
     
-      expect(component.children('.grid-row')).to.have.length(0)
-    })
+    //   expect(component.children('.grid-row')).to.have.length(0)
+    // })
 
   });
 });
